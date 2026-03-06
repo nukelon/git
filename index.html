@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Browser Git Demo for GitHub Pages</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header>
+    <h1>Browser Git Demo</h1>
+    <p>在 GitHub Pages 上测试“浏览器伪装 git 客户端”模式。仅适合实验。</p>
+  </header>
+
+  <main class="layout">
+    <section class="panel controls">
+      <h2>仓库连接</h2>
+      <div class="grid two-col">
+        <label>
+          仓库 HTTPS URL
+          <input id="repoUrl" type="text" placeholder="https://github.com/你的用户名/你的仓库.git" />
+        </label>
+        <label>
+          分支
+          <input id="branch" type="text" value="main" />
+        </label>
+        <label>
+          本地目录名
+          <input id="dirName" type="text" value="/demo-repo" />
+        </label>
+        <label>
+          CORS Proxy
+          <input id="corsProxy" type="text" value="https://cors.isomorphic-git.org" />
+        </label>
+        <label>
+          GitHub 用户名
+          <input id="username" type="text" placeholder="你的 GitHub 用户名" autocomplete="username" />
+        </label>
+        <label>
+          Personal Access Token
+          <input id="token" type="password" placeholder="把 token 当作 HTTPS 密码使用" autocomplete="current-password" />
+        </label>
+      </div>
+
+      <div class="button-row">
+        <button id="saveSettingsBtn">保存设置到浏览器</button>
+        <button id="wipeFsBtn">清空浏览器文件系统</button>
+        <button id="cloneBtn">Clone</button>
+        <button id="pullBtn">Pull</button>
+        <button id="refreshFilesBtn">刷新文件列表</button>
+        <button id="showStatusBtn">查看状态</button>
+        <button id="showLogBtn">查看最近提交</button>
+      </div>
+    </section>
+
+    <section class="panel editor-shell">
+      <div class="sidebar">
+        <div class="sidebar-head">
+          <h2>文件列表</h2>
+          <button id="refreshFilesBtn2">刷新</button>
+        </div>
+        <ul id="fileList" class="file-list"></ul>
+      </div>
+
+      <div class="editor-panel">
+        <div class="grid two-col compact">
+          <label>
+            当前文件路径
+            <input id="currentPath" type="text" placeholder="例如 README.md" />
+          </label>
+          <label>
+            新建文件路径
+            <input id="newFilePath" type="text" placeholder="例如 notes/test.txt" />
+          </label>
+        </div>
+
+        <div class="button-row">
+          <button id="loadFileBtn">加载文件</button>
+          <button id="saveFileBtn">保存到工作区</button>
+          <button id="createFileBtn">新建文件</button>
+          <button id="stageCurrentBtn">Add 当前文件</button>
+          <button id="deleteCurrentBtn">删除并 Stage</button>
+          <button id="stageAllBtn">Stage 所有变更</button>
+        </div>
+
+        <textarea id="editor" spellcheck="false" placeholder="这里编辑文件内容"></textarea>
+      </div>
+    </section>
+
+    <section class="panel controls">
+      <h2>提交与推送</h2>
+      <div class="grid three-col">
+        <label>
+          Author Name
+          <input id="authorName" type="text" placeholder="Mr. Test" />
+        </label>
+        <label>
+          Author Email
+          <input id="authorEmail" type="email" placeholder="mrtest@example.com" />
+        </label>
+        <label>
+          Commit Message
+          <input id="commitMessage" type="text" placeholder="Update files from browser demo" />
+        </label>
+      </div>
+      <div class="button-row">
+        <button id="commitBtn">Commit</button>
+        <button id="pushBtn">Push</button>
+      </div>
+    </section>
+
+    <section class="panel output-panel">
+      <div class="output-head">
+        <h2>输出日志</h2>
+        <button id="clearLogBtn">清空日志</button>
+      </div>
+      <pre id="output"></pre>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/@isomorphic-git/lightning-fs@4.6.2"></script>
+  <script src="https://unpkg.com/isomorphic-git@1.37.2"></script>
+  <script type="module" src="app.js"></script>
+</body>
+</html>
